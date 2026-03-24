@@ -1,0 +1,178 @@
+/* ============================================================
+   ETHANOS DARK ENGINE v8 — SIGILCORE + DEAD PIXELS (NO SHAKE)
+   ============================================================ */
+
+/* ---------------- DISCORD SHIELD ---------------- */
+html.theme-dark, html.theme-dark * {
+    animation: none !important;
+    transform: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+}
+
+/* ============================================================
+   REND_R SIGIL SPLASH (FULLSCREEN, FAKE-RANDOM 5–20s)
+   ============================================================ */
+
+@keyframes rendrFlashA {
+    0%, 96% { opacity: 0; }
+    97%, 99% { opacity: 1; }
+    100% { opacity: 0; }
+}
+@keyframes rendrFlashB {
+    0%, 92% { opacity: 0; }
+    93%, 95% { opacity: 1; }
+    100% { opacity: 0; }
+}
+@keyframes rendrFlashC {
+    0%, 98% { opacity: 0; }
+    99% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+html:not(.theme-dark)::before {
+    content: "   /\\\A  /  \\\A /  / \\\A/__/___\\\A\A R E N D_R";
+    white-space: pre;
+    font-family: monospace;
+    font-size: 26px;
+    color: #ff0000;
+    background: #000;
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999999;
+    opacity: 0;
+    pointer-events: none;
+    animation:
+        rendrFlashA 13s infinite,
+        rendrFlashB 17s infinite,
+        rendrFlashC 21s infinite;
+}
+
+/* ============================================================
+   DEAD PIXEL CORRUPTION (NO SCREEN SHAKE)
+   ============================================================ */
+
+@keyframes deadPixelsOpacity {
+    0%, 85% { opacity: 0; }
+    86%, 95% { opacity: 1; }
+    96%, 100% { opacity: 0; }
+}
+
+@keyframes deadPixelsDrift {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(2px); }
+    100% { transform: translateX(-2px); }
+}
+
+html:not(.theme-dark)::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999998;
+    opacity: 0;
+
+    background-image:
+        linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(255,255,255,0.9)),
+        linear-gradient(to bottom, rgba(255,0,0,0.8), rgba(255,0,0,0.8)),
+        linear-gradient(to bottom, rgba(0,255,255,0.8), rgba(0,255,255,0.8));
+    background-repeat: no-repeat;
+    background-size:
+        2px 100%,
+        1px 100%,
+        2px 100%;
+    background-position:
+        10vw 0,
+        40vw 0,
+        73vw 0;
+
+    animation:
+        deadPixelsOpacity 11s infinite,
+        deadPixelsDrift 1.2s infinite;
+}
+
+/* ============================================================
+   GLOBAL GLITCH EFFECTS (NON-DISCORD ONLY)
+   ============================================================ */
+
+/* RGB split */
+@keyframes rgbSplitStrong {
+    0%, 85% { text-shadow: none; }
+    86% { text-shadow: 5px 0 red, -5px 0 cyan; }
+    87% { text-shadow: -5px 0 red, 5px 0 cyan; }
+    88% { text-shadow: 3px 0 red, -3px 0 cyan; }
+    89% { text-shadow: none; }
+}
+
+/* data tearing */
+@keyframes dataTearStrong {
+    0%, 90% { transform: translate(0,0); }
+    91% { transform: translate(0, -12px); }
+    92% { transform: translate(0, 8px); }
+    93% { transform: translate(0, -15px); }
+    94%, 100% { transform: translate(0, 0); }
+}
+
+/* redaction */
+@keyframes redactStrong {
+    0%, 80% { background: transparent; color: inherit; }
+    81%, 95% { background: #000 !important; color: #000 !important; }
+    96%, 100% { background: transparent; color: inherit; }
+}
+
+/* global flicker */
+@keyframes globalFlickerStrong {
+    0%, 95% { filter: none; }
+    96% { filter: contrast(300%) brightness(200%) saturate(200%); }
+    97% { filter: contrast(50%) brightness(50%) saturate(50%); }
+    98% { filter: contrast(200%) brightness(150%); }
+    99%, 100% { filter: none; }
+}
+
+/* apply only on non‑Discord pages */
+html:not(.theme-dark) body *:nth-child(7n) {
+    animation: rgbSplitStrong 1.5s infinite;
+}
+html:not(.theme-dark) body *:nth-child(11n) {
+    animation: dataTearStrong 2s infinite;
+}
+html:not(.theme-dark) body *:nth-child(15n) {
+    animation: redactStrong 5s infinite;
+}
+html:not(.theme-dark) {
+    animation: globalFlickerStrong 3s infinite;
+}
+/* Active tab highlight */
+.tab.active {
+    border: 2px solid #ff0000 !important;
+    box-shadow: 0 0 6px #ff0000 !important;
+}
+
+/* Hover effect */
+.tab:hover {
+    border: 1px solid #ff4444 !important;
+}
+
+/* Toolbar separator line */
+.toolbar {
+    border-bottom: 1px solid #ff0000 !important;
+}
+
+/* Optional: subtle red glow on tab bar */
+.tab-bar {
+    box-shadow: 0 0 10px #550000 inset !important;
+}
+body {
+    background: red !important;
+}
+html, body {
+
+    background: #000 !important;
+    color: #ff0000 !important;
+}
+a {
+    color: #ff4444 !important;
+}
